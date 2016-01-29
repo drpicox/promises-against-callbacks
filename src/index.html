@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html ng-app="drpxScaffoldApp" ng-strict-di>
+<html ng-app="pacApp" ng-strict-di>
 <head>
-	<title>Angular1 Scaffold App</title>
+	<title>Promises vs Callbacks</title>
 	<!-- build:css({.tmp,.}) app.css -->
 	<link href="bundle.css" rel='stylesheet' type='text/css'>
 	<!-- endbuild -->
@@ -17,22 +17,29 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#/">Scaffold App</a>
+				<a class="navbar-brand" href="#/">Promises vs Callbacks</a>
 			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+	            <ul class="nav navbar-nav navbar-right">
+	              <li><a href="https://github.com/drpicox" target="_blank">@drpicox</a></li>
+	            </ul>
+          </div>
 		</div>
 	</nav>
 
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Angular is {{'enabled'}}.</h1>
-			<p>This is the basic angular template. You can follow the next link to learn more about it.</p>
-			<p><a class="btn btn-primary btn-lg" href="https://github.com/drpicox/angular1-scaffold" role="button" target="_blank">Learn more</a></p>
+			<pac-book-overview></pac-book-overview>
+			<p><a class="btn btn-primary btn-lg" href ng-click="seeMore = true" role="button" target="_blank">See more</a></p>
 		</div>
 	</div>
 
-	<div class="container">
-		<ng-view autoscroll></ng-view>
+	<div class="container" ng-if="seeMore">
+		<div class="well">
+			<pac-book-details></pac-book-details>
+		</div>
 	</div>
+
 
 	<!-- build:js({.tmp,.}) app.js -->
 	<script src="bundle.js"></script>

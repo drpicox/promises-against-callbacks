@@ -1,6 +1,6 @@
-appCodename = 'scf'
+appCodename = 'pac'
 styles = 'sass' # 'less' # or 'sass'
-portServe = 9259
+portServe = 9927
 
 module.exports = (grunt) ->
 

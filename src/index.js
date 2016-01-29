@@ -2,20 +2,17 @@
 
 var angular = require('angular');
 
-module.exports = angular.module('drpxScaffoldApp', [
+module.exports = angular.module('pacApp', [])
 
-	//require('./yourLogic'),
+.directive('pacBookDetails', require('./BookDetails.directive'))
+.directive('pacBookOverview', require('./BookOverview.directive'))
 
-	//require('angular-route')
-])
+.factory('httpBook', require('./HttpBook.1.factory'))
 
-/*
-.config(function($routeProvider) {
+// warmup
+//.run(function(httpBook) { httpBook.get(); })
 
-	$routeProvider.otherwise({
-		redirectTo: '/TODO',
-	});
-})
-*/
+// simulate illegal op
+//.run(function(httpBook) { httpBook.get(function(book) { book.countPages(); }); })
 
 .name;
