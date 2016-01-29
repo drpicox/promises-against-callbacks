@@ -121,6 +121,14 @@ PROBLEM: try to understand resulting code
 
 Modify `httpBook`, `BookDetails` and `BookOverview` to use promises.
 
+Also update the simulation of illegal op:
+
+```javascript
+// simulate illegal op
+//.run(function(httpBook) { httpBook.get(function(book) {book.countPages();}); })
+.run(function(httpBook) { httpBook.get().then(function(book) { book.countPages(); }); })
+```
+
 > Branches: step7
 
 
