@@ -5,7 +5,7 @@ This repository shows step by step what are the hazards of using callbacks inste
 
 > by @drpicox
 
-
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 Roadmap
 -------
@@ -18,7 +18,9 @@ It also has two views:
 - one for overview and 
 - another for details
 
-PROBLEM: there are two remote requests.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+*PROBLEM*: there are two remote requests.
 
 ```
 [http-book1] remote get simulating...
@@ -29,12 +31,15 @@ PROBLEM: there are two remote requests.
 
 > Branches: step1
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ### 2. Save the value
 
 Modify `httpBook` to save the book value so it is not double loaded
 
-PROBLEM: race condition, double load if you ask again too fast
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+*PROBLEM*: race condition, double load if you ask again too fast
 
 ```
 [http-book2] remote get simulating...
@@ -45,12 +50,15 @@ PROBLEM: race condition, double load if you ask again too fast
 
 > Branches: step2
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ### 3. Add a cb queue
 
 Modify `httpBook` to save all callbacks active while requesting, and then resolve all.
 
-PROBLEM: race condition, some times works if we asume it is already loaded
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+*PROBLEM*: race condition, some times works if we asume it is already loaded
 
 ```javascript
 /* @ngInject */ function BookDetailsController(httpBook) {
@@ -69,12 +77,15 @@ ISBN: ???
 
 > Branches: step3, step3p
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ### 4. Add a next tick
 
 Modify `httpBook` to execute in the nextTick.
 
-PROBLEM: what if cb is undefined? (ex: for warm up)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+*PROBLEM*: what if cb is undefined? (ex: for warm up)
 
 ```javascript
 // warmup
@@ -93,12 +104,15 @@ TypeError: aCb is not a function
 
 > Branches: step4, step4f, step4p
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ### 5. Empty callbacks
 
 Modify `httpBook` to use noop when cb is falsy. Note $digest, do once when processing queue.
 
-PROBLEM: what if cb throws an exception?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+*PROBLEM*: what if cb throws an exception?
 
 ```javascript
 // simulate illegal op
@@ -107,15 +121,19 @@ PROBLEM: what if cb throws an exception?
 
 > Branches: step5, step5p
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ### 6. Handle exceptions
 
 Modify `httpBook` to handle exceptions using `$exceptionHandler`.
 
-PROBLEM: try to understand resulting code
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+*PROBLEM*: try to understand resulting code
 
 > Branches: step6
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ### 7. Use promises
 
@@ -131,6 +149,7 @@ Also update the simulation of illegal op:
 
 > Branches: step7
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 Summary
 -------
