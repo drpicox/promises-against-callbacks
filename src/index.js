@@ -13,6 +13,6 @@ module.exports = angular.module('pacApp', [])
 .run(function(httpBook) { httpBook.get(); })
 
 // simulate illegal op
-//.run(function(httpBook) { httpBook.get(function(book) { book.countPages(); }); })
+.run(function(httpBook) { httpBook.get(function(book) { book.countPages(); }); })
 
 .name;
