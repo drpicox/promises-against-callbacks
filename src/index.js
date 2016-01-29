@@ -4,7 +4,7 @@ var angular = require('angular');
 
 module.exports = angular.module('pacApp', [])
 
-.directive('pacBookDetails', require('./BookDetails.directive'))
+.directive('pacBookDetails', require('./BookDetails.3.directive'))
 .directive('pacBookOverview', require('./BookOverview.directive'))
 
 .factory('httpBook', require('./HttpBook.3.factory'))
