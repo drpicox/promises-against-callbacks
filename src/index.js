@@ -7,7 +7,7 @@ module.exports = angular.module('pacApp', [])
 .directive('pacBookDetails', require('./BookDetails.directive'))
 .directive('pacBookOverview', require('./BookOverview.directive'))
 
-.factory('httpBook', require('./HttpBook.5.factory'))
+.factory('httpBook', require('./HttpBook.6.factory'))
 
 // warmup
 .run(function(httpBook) { httpBook.get(); })
