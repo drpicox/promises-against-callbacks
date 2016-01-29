@@ -10,7 +10,7 @@ module.exports = angular.module('pacApp', [])
 .factory('httpBook', require('./HttpBook.4.factory'))
 
 // warmup
-//.run(function(httpBook) { httpBook.get(); })
+.run(function(httpBook) { httpBook.get(); })
 
 // simulate illegal op
 //.run(function(httpBook) { httpBook.get(function(book) { book.countPages(); }); })
