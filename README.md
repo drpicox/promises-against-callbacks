@@ -20,7 +20,7 @@ It also has two views:
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-*PROBLEM*: there are two remote requests.
+**PROBLEM**: there are two remote requests.
 
 ```
 [http-book1] remote get simulating...
@@ -39,7 +39,7 @@ Modify `httpBook` to save the book value so it is not double loaded
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-*PROBLEM*: race condition, double load if you ask again too fast
+**PROBLEM**: race condition, double load if you ask again too fast
 
 ```
 [http-book2] remote get simulating...
@@ -58,7 +58,7 @@ Modify `httpBook` to save all callbacks active while requesting, and then resolv
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-*PROBLEM*: race condition, some times works if we asume it is already loaded
+**PROBLEM**: race condition, some times works if we asume it is already loaded
 
 ```javascript
 /* @ngInject */ function BookDetailsController(httpBook) {
@@ -85,7 +85,7 @@ Modify `httpBook` to execute in the nextTick.
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-*PROBLEM*: what if cb is undefined? (ex: for warm up)
+**PROBLEM**: what if cb is undefined? (ex: for warm up)
 
 ```javascript
 // warmup
@@ -112,7 +112,7 @@ Modify `httpBook` to use noop when cb is falsy. Note $digest, do once when proce
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-*PROBLEM*: what if cb throws an exception?
+**PROBLEM**: what if cb throws an exception?
 
 ```javascript
 // simulate illegal op
@@ -129,7 +129,7 @@ Modify `httpBook` to handle exceptions using `$exceptionHandler`.
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-*PROBLEM*: try to understand resulting code
+**PROBLEM**: try to understand resulting code
 
 > Branches: step6
 
