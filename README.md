@@ -129,13 +129,25 @@ Modify `httpBook` to handle exceptions using `$exceptionHandler`.
 
 ---
 
-**PROBLEM**: try to understand resulting code
+**PROBLEM**: There is garbage!
 
 > Branches: step6
 
 ---
 
-### 7. Use promises
+### 7. Clear callback queue
+
+Modify `httpBook` to remove all elements from the callback queue.
+
+---
+
+**PROBLEM**: try to understand resulting code
+
+> Branches: step7
+
+---
+
+### 8. Use promises
 
 Modify `httpBook`, `BookDetails` and `BookOverview` to use promises.
 
@@ -147,7 +159,24 @@ Also update the simulation of illegal op:
 .run(function(httpBook) { httpBook.get().then(function(book) { book.countPages(); }); })
 ```
 
-> Branches: step7
+> Branches: step8
+
+---
+
+#### Backwards compatibility
+
+You can add this code to `httpBook.get` in order to find and remove callbacks:
+
+```javascript
+function get(iDoNotWantCallbacks) {
+  if (iDoNotWantCallbacks) {
+    throw new Error('Callback found. '+iDoNotWantCallbacks);
+  }
+  ...
+} 
+```
+
+> Branches: step8
 
 ---
 
