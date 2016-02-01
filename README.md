@@ -5,7 +5,7 @@ This repository shows step by step what are the hazards of using callbacks inste
 
 > by @drpicox
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
 Roadmap
 -------
@@ -18,7 +18,7 @@ It also has two views:
 - one for overview and 
 - another for details
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
 **PROBLEM**: there are two remote requests.
 
@@ -31,13 +31,13 @@ It also has two views:
 
 > Branches: step1
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
 ### 2. Save the value
 
 Modify `httpBook` to save the book value so it is not double loaded
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
 **PROBLEM**: race condition, double load if you ask again too fast
 
@@ -50,13 +50,13 @@ Modify `httpBook` to save the book value so it is not double loaded
 
 > Branches: step2
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
 ### 3. Add a cb queue
 
 Modify `httpBook` to save all callbacks active while requesting, and then resolve all.
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
 **PROBLEM**: race condition, some times works if we asume it is already loaded
 
@@ -77,13 +77,13 @@ ISBN: ???
 
 > Branches: step3, step3p
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
 ### 4. Add a next tick
 
 Modify `httpBook` to execute in the nextTick.
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
 **PROBLEM**: what if cb is undefined? (ex: for warm up)
 
@@ -104,13 +104,13 @@ TypeError: aCb is not a function
 
 > Branches: step4, step4f, step4p
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
 ### 5. Empty callbacks
 
 Modify `httpBook` to use noop when cb is falsy. Note $digest, do once when processing queue.
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
 **PROBLEM**: what if cb throws an exception?
 
@@ -121,21 +121,33 @@ Modify `httpBook` to use noop when cb is falsy. Note $digest, do once when proce
 
 > Branches: step5, step5p
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
 ### 6. Handle exceptions
 
 Modify `httpBook` to handle exceptions using `$exceptionHandler`.
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
-**PROBLEM**: try to understand resulting code
+**PROBLEM**: There is garbage!
 
 > Branches: step6
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+---
 
-### 7. Use promises
+### 7. Clear callback queue
+
+Modify `httpBook` to remove all elements from the callback queue.
+
+---
+
+**PROBLEM**: try to understand resulting code
+
+> Branches: step7
+
+---
+
+### 8. Use promises
 
 Modify `httpBook`, `BookDetails` and `BookOverview` to use promises.
 
@@ -147,9 +159,24 @@ Also update the simulation of illegal op:
 .run(function(httpBook) { httpBook.get().then(function(book) { book.countPages(); }); })
 ```
 
-> Branches: step7
+---
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+#### Backwards compatibility
+
+You can add this code to `httpBook.get` in order to find and remove callbacks:
+
+```javascript
+function get(iDoNotWantCallbacks) {
+  if (iDoNotWantCallbacks) {
+    throw new Error('Callback found. '+iDoNotWantCallbacks);
+  }
+  ...
+} 
+```
+
+> Branches: step8
+
+---
 
 Summary
 -------
