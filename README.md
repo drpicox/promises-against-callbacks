@@ -159,6 +159,8 @@ Also update the simulation of illegal op:
 .run(function(httpBook) { httpBook.get().then(function(book) { book.countPages(); }); })
 ```
 
+> Branches: step8
+
 ---
 
 #### Backwards compatibility
